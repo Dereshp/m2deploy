@@ -1,0 +1,23 @@
+{
+    "name": "x2y/module-float-payments",
+    "version": "1.0.2",
+    "description": "Float payments magento 2 module",
+    "type": "magento2-module",
+    "require": {
+        "magento/framework": "*",
+        "magento/module-payment": "*",
+        "magento/module-checkout": "*",
+        "magento/module-sales": "*"
+    },
+    "license": [
+        "Proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "X2Y\\FloatPayments\\": ""
+        }
+    }
+}

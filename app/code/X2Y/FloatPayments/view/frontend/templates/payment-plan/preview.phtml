@@ -1,0 +1,44 @@
+<?php
+/**
+ * @author    X2Y.io Dev Team
+ * @copyright Copyright (c) X2Y.io, Inc. (https://x2y.io/)
+ */
+/**
+ * @var $block X2Y\FloatPayments\Block\PaymentPlanPreview
+ */
+?>
+
+<?php if ($block->getMaxMonths() != 0) : ?>
+    <div class="float-payment-preview" id="floatPaymentPlanPreview">
+        <div class="info">
+            <div class="float-logo">
+                <img src="<?= /* @noEscape */ $block->getViewFileUrl('X2Y_FloatPayments::images/logo.png'); ?>"
+                     alt="<?= /* @noEscape */ __('Float'); ?>" width="100" />
+            </div>
+            <span data-role="message"></span>
+            <a href="javascript:void(0)" data-role="popup-trigger">
+                <?= /* @noEscape */ __('How it works') ?>
+            </a>
+        </div>
+
+        <div data-role="popup-content" data-mage-init='{
+            "Magento_Ui/js/modal/modal": {
+                "trigger": "[data-role=\"popup-trigger\"]",
+                "modalClass": "float-how-it-works",
+                "buttons": false
+            }
+        }'>
+            <iframe src="<?= $block->getHowItWorksUrl(); ?>" width="100%" height="850"></iframe>
+        </div>
+    </div>
+
+    <script type="text/x-magento-init">
+    {
+        "#floatPaymentPlanPreview": {
+            "X2Y_FloatPayments/js/view/preview-payment": {
+                "config": <?= /* @noEscape */ $block->getJsonConfig() ?>
+            }
+        }
+    }
+</script>
+<?php endif; ?>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+/**
+ * @author    X2Y.io Dev Team
+ * @copyright Copyright (c) X2Y.io, Inc. (https://x2y.io/)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="payment_method_is_active">
+        <observer name="x2y_float_method_availability" instance="X2Y\FloatPayments\Observer\CheckAvailability"/>
+    </event>
+</config>

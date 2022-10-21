@@ -1,0 +1,120 @@
+/**
+ * @author    X2Y.io Dev Team
+ * @copyright Copyright (c) X2Y.io, Inc. (https://x2y.io/)
+ */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .float-payment-preview {
+        display: none;
+        .lib-clearer();
+
+        .float-logo {
+            float: left;
+            margin-right: 15px;
+            padding: 0 0 15px;
+        }
+
+        .info {
+            padding: 10px 0;
+
+            & > span {
+                display: block;
+                margin-bottom: 5px;
+
+                & > i {
+                    font-style: normal;
+                    color: #ef0f60;
+                }
+            }
+
+            a {
+                display: inline-block;
+                color: @color-black_dark;
+                text-decoration: underline;
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+
+    .payment-preview {
+        margin: -15px 0 10px !important;
+        .lib-line-height(21);
+
+        & > i {
+            font-style: normal;
+            color: #ef0f60;
+        }
+
+        &:after {
+            content: "";
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='470.57' height='229.3' viewBox='0 0 470.57 229.3'%3E%3Cpath id='Float_Logo_Wordmark_Ruby' d='M217.78,221.24h7.48v26.35h-7.48c-11.58,0-22.12,11.67-22.12,24.48v14.45h29.6v26.35h-29.6V414.65H169.32V312.87h-29.6V286.52h29.6V272.07C169.31,244.52,191.51,221.24,217.78,221.24Zm306.9,129.32v63.85H498.34V402.18a63.037,63.037,0,0,1-37.41,12.14,63.76,63.76,0,1,1,63.75-63.76Zm-37.32-26.45a37.392,37.392,0,1,0,10.97,26.47A37.194,37.194,0,0,0,487.36,324.11Zm122.93-11.37V286.4H580.9V247.51H554.56V286.4H524.68v26.35h29.88v53.2a48.516,48.516,0,0,0,48.46,48.46h7.26V388.06h-7.26a22.141,22.141,0,0,1-22.12-22.12v-53.2Zm-342.57,53.2V221H241.38V365.94a48.516,48.516,0,0,0,48.46,48.46h11.05V388.05H289.84A22.126,22.126,0,0,1,267.72,365.94ZM415.73,247.7a62.35,62.35,0,1,1-62.35-62.35A62.35,62.35,0,0,1,415.73,247.7Zm-26.45,0a35.89,35.89,0,1,0-35.89,35.89A35.892,35.892,0,0,0,389.28,247.7Zm-19.59,88.58-16.3-26.45-16.3,26.45Z' transform='translate(-139.72 -185.35)' fill='%23ef0f60'/%3E%3C/svg%3E%0A");
+            background-repeat: no-repeat;
+            background-position: 0 bottom;
+            width: 42px;
+            height: 21px;
+            background-size: 41px;
+            display: inline-block;
+            margin: 0;
+            vertical-align: baseline;
+        }
+    }
+
+    .product-info-main {
+        .product-info-price .payment-preview {
+            .lib-visually-hidden();
+        }
+    }
+
+    .modal-popup.float-how-it-works {
+        .modal-inner-wrap {
+            max-width: 800px !important;
+            width: 100% !important;
+
+            iframe {
+                border: none;
+                max-height: 80vh;
+                max-width: 100%;
+            }
+        }
+
+        .modal-header,
+        .modal-content,
+        .modal-footer {
+            padding: 0 !important;
+        }
+
+        .modal-content {
+            width: 100% !important;
+
+            div[data-role="popup-content"] {
+                margin: 0 !important;
+            }
+        }
+
+        .action-close:before,
+        .action-close:before,
+        .action-close:before {
+            color: @color-black;
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .modal-popup.float-how-it-works {
+        .modal-inner-wrap {
+            width: 95%;
+        }
+    }
+}
+

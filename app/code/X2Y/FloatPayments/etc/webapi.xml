@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+/**
+ * @author    X2Y.io Dev Team
+ * @copyright Copyright (c) X2Y.io, Inc. (https://x2y.io/)
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- Managing payment information for guests -->
+    <route url="/V1/guest-carts/:cartId/create-float-order" method="POST">
+        <service class="X2Y\FloatPayments\Api\CreateOrderInterface" method="execute"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <!-- Managing payment information for logged-in customers -->
+    <route url="/V1/carts/mine/create-float-order" method="POST">
+        <service class="X2Y\FloatPayments\Api\CreateOrderInterface" method="execute"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+</routes>

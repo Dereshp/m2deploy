@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    X2Y.io Dev Team
+ * @copyright Copyright (c) X2Y.io, Inc. (https://x2y.io/)
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="float.payment.preview.plan" remove="true" />
+        <referenceBlock name="float.payment.preview.plan.listing" remove="true" />
+    </body>
+</page>

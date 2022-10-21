@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+/**
+ * @author    X2Y.io Dev Team
+ * @copyright Copyright (c) X2Y.io, Inc. (https://x2y.io/)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+<!-- Payment Method Facade configuration -->
+    <virtualType name="FloatPaymentsGatewayFacade" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="const">\X2Y\FloatPayments\Helper\Data::METHOD_CODE</argument>
+            <argument name="formBlockType" xsi:type="string">Magento\Payment\Block\Form</argument>
+            <argument name="infoBlockType" xsi:type="string">Magento\Payment\Block\Info</argument>
+            <argument name="valueHandlerPool" xsi:type="object">FloatPaymentsGatewayValueHandlerPool</argument>
+            <argument name="commandPool" xsi:type="object">FloatPaymentsGatewayCommandPool</argument>
+            <argument name="validatorPool" xsi:type="object">FloatValidatorPool</argument>
+        </arguments>
+    </virtualType>
+
+<!-- Value handlers -->
+    <virtualType name="FloatPaymentsGatewayValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">FloatPaymentsGatewayConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="FloatPaymentsGatewayConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">FloatPaymentsConfig</argument>
+        </arguments>
+    </virtualType>
+
+<!-- Initialize payment method config  -->
+    <virtualType name="FloatPaymentsConfig" type="Magento\Payment\Gateway\Config\Config">
+        <arguments>
+            <argument name="methodCode" xsi:type="const">\X2Y\FloatPayments\Helper\Data::METHOD_CODE</argument>
+            <argument name="pathPattern" xsi:type="const">\X2Y\FloatPayments\Helper\Data::XPATH_PATTERN</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="X2Y\FloatPayments\Model\Ui\ConfigProvider">
+        <arguments>
+            <argument name="config" xsi:type="object">FloatPaymentsConfig</argument>
+        </arguments>
+    </type>
+
+<!-- Initialize Float payment method logger -->
+    <virtualType name="FloatPaymentsLogger" type="Magento\Payment\Model\Method\Logger">
+        <arguments>
+            <argument name="config" xsi:type="object">FloatPaymentsConfig</argument>
+        </arguments>
+    </virtualType>
+
+<!-- Commands Pool -->
+    <virtualType name="FloatPaymentsGatewayCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="sale" xsi:type="string">X2Y\FloatPayments\Gateway\SaleCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+<!-- Validator Pool -->
+    <virtualType name="FloatValidatorPool" type="Magento\Payment\Gateway\Validator\ValidatorPool">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="currency" xsi:type="string">X2Y\FloatPayments\Gateway\Validator\Currency</item>
+                <item name="country" xsi:type="string">X2Y\FloatPayments\Gateway\Validator\Country</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+<!-- Interface preferences -->
+    <preference for="X2Y\FloatPayments\Api\Data\LoginResultInterface"
+                type="X2Y\FloatPayments\Model\Data\LoginResult"/>
+    <preference for="X2Y\FloatPayments\Api\CreateOrderInterface"
+                type="X2Y\FloatPayments\Model\CreateOrder"/>
+    <preference for="X2Y\FloatPayments\Model\Spi\LoginInterface"
+                type="X2Y\FloatPayments\Model\Spi\Login"/>
+
+<!-- Custom debug log  -->
+    <virtualType name="DebugLoggerHandler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/float.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="ErrorLoggerHandler" type="Magento\Framework\Logger\Handler\System">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/float.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="floatLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">DebugLoggerHandler</item>
+                <item name="error" xsi:type="object">ErrorLoggerHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+<!-- Inject custom logger into helper, this helper used to log, because we need to check if debug is enabled for method -->
+    <type name="X2Y\FloatPayments\Helper\Data">
+        <arguments>
+            <argument name="logger" xsi:type="object">floatLogger</argument>
+        </arguments>
+    </type>
+</config>

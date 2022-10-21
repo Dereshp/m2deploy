@@ -1,0 +1,20 @@
+<?php
+// Magento\Framework\View\Element\Template;
+/**
+ * @var $block Magento\Framework\View\Element\Template
+ * @var $viewModel X2Y\FloatPayments\ViewModel\MultishippingComponent
+ */
+$viewModel = $block->getData('viewModel');
+?>
+
+<?php if ($viewModel->isPaymentFloat()): ?>
+    <script type="text/x-magento-init">
+    {
+       "*": {
+           "X2Y_FloatPayments/js/multishipping/float-order": {
+                "cartId" : <?= $viewModel->getCartId(); ?>
+           }
+       }
+    }
+    </script>
+<?php endif; ?>

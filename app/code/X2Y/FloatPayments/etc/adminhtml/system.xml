@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+/**
+ * @author    X2Y.io Dev Team
+ * @copyright Copyright (c) X2Y.io, Inc. (https://x2y.io/)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <group id="float" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <comment><![CDATA[<div class="float-payment-logo"></div><div class="float-payment-text">Big shopping.<br/>Small payments.<br/>Grow sales by offering your customers interest-free credit card instalments with <a href="https://float.co.za" target="_blank">Float</a>.</div>]]></comment>
+                <fieldset_css>complex float-section</fieldset_css>
+                <frontend_model>X2Y\FloatPayments\Block\Adminhtml\System\Config\Fieldset\Payment</frontend_model>
+                <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Configuration</label>
+                    <field id="active" translate="label" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Enable Solution</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment><![CDATA[Sign up for an account with <a href="https://float.co.za/home/business" target="_blank">Float</a>.]]></comment>
+                    </field>
+                    <field id="title" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Title</label>
+                        <depends>
+                            <field id="active">1</field>
+                        </depends>
+                    </field>
+                    <field id="show_advanced_options" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Show Advanced Options</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="active">1</field>
+                        </depends>
+                    </field>
+                    <field id="allowspecific" translate="label" type="allowspecific" sortOrder="3" showInDefault="1"  showInWebsite="1" showInStore="0">
+                        <label>Payment from Applicable Countries</label>
+                        <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                        <depends>
+                            <field id="active">1</field>
+                            <field id="show_advanced_options">1</field>
+                        </depends>
+                    </field>
+                    <field id="specificcountry" translate="label" type="multiselect" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Payment from Specific Countries</label>
+                        <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                        <can_be_empty>1</can_be_empty>
+                        <depends>
+                            <field id="active">1</field>
+                            <field id="show_advanced_options">1</field>
+                            <field id="allowspecific">1</field>
+                        </depends>
+                    </field>
+                    <field id="currency" translate="label" type="multiselect" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Allowed Currencies</label>
+                        <source_model>Magento\Config\Model\Config\Source\Locale\Currency</source_model>
+                        <can_be_empty>1</can_be_empty>
+                        <depends>
+                            <field id="active">1</field>
+                            <field id="show_advanced_options">1</field>
+                        </depends>
+                    </field>
+                    <field id="successful_order_status" translate="label" type="select" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Successful Order Status</label>
+                        <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                        <depends>
+                            <field id="active">1</field>
+                            <field id="show_advanced_options">1</field>
+                        </depends>
+                    </field>
+                    <field id="debug" translate="label" type="select" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Enable Debug</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="active">1</field>
+                            <field id="show_advanced_options">1</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="api" translate="label" type="text" sortOrder="20"  showInWebsite="1" showInDefault="1" showInStore="0">
+                    <label>Api</label>
+                    <field id="mode" translate="label" type="select" sortOrder="0" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Mode</label>
+                        <source_model>X2Y\FloatPayments\Model\Config\Source\Mode</source_model>
+                        <comment><![CDATA[For assistance contact <a href="mailto:support@float.co.za">support@float.co.za</a>.]]></comment>
+                    </field>
+                    <field id="url_sandbox" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Sandbox Api Url</label>
+                        <depends>
+                            <field id="mode">sandbox</field>
+                        </depends>
+                    </field>
+                    <field id="url_production" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Production Api Url</label>
+                        <depends>
+                            <field id="mode">production</field>
+                        </depends>
+                    </field>
+                    <field id="merchant_id" translate="label" type="obscure" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Merchant ID</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    </field>
+                    <field id="client_id" translate="label" type="obscure" sortOrder="4" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Client ID</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    </field>
+                    <field id="client_secret" translate="label" type="obscure" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Client Secret</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    </field>
+                    <field id="token" translate="label" type="text" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="6">
+                        <label>Token</label>
+                        <comment><![CDATA[<b>Do not edit this field.</b> Token retrieves automatically. If you want to renew token, delete current value.]]></comment>
+                    </field>
+                    <field id="login_data" translate="label" type="text" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="7">
+                        <label>Login data</label>
+                        <comment><![CDATA[<b>Do not edit this field.</b> Login data retrieves automatically. If you want to renew this, delete token value.]]></comment>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

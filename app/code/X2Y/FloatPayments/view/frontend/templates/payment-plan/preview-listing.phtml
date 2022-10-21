@@ -1,0 +1,20 @@
+<?php
+/**
+ * @author    X2Y.io Dev Team
+ * @copyright Copyright (c) X2Y.io, Inc. (https://x2y.io/)
+ */
+/**
+ * @var $block X2Y\FloatPayments\Block\PaymentPlanPreview
+ */
+?>
+<?php if ($block->getMaxMonths() != 0) : ?>
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "X2Y_FloatPayments/js/view/payment-preview-listing": {
+                    "config": <?= /* @noEscape */ $block->getJsonConfig(); ?>
+                }
+            }
+        }
+    </script>
+<?php endif; ?>

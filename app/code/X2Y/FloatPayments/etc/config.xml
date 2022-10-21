@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+/**
+ * @author    X2Y.io Dev Team
+ * @copyright Copyright (c) X2Y.io, Inc. (https://x2y.io/)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <float>
+                <api>
+                    <mode>sandbox</mode>
+                    <url_sandbox>https://float-finance-uat.herokuapp.com</url_sandbox>
+                    <url_production>https://www.float.co.za</url_production>
+                </api>
+                <general>
+                    <active>0</active>
+                    <title>Interest-free monthly payments using your credit card.</title>
+                    <allowspecific>1</allowspecific>
+                    <specificcountry>ZA</specificcountry>
+                    <currency>ZAR</currency>
+                    <order_status>processing</order_status>
+                    <payment_action>authorize_capture</payment_action>
+                    <is_gateway>0</is_gateway>
+                    <can_authorize>0</can_authorize>
+                    <can_capture>0</can_capture>
+                    <can_sale>1</can_sale>
+                    <can_order>1</can_order>
+                    <is_offline>1</is_offline>
+                    <can_use_checkout>1</can_use_checkout>
+                    <can_use_internal>1</can_use_internal>
+                    <allow_multiple_address>1</allow_multiple_address>
+                    <merchant_id backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                    <client_id backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                    <client_secret backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                    <successful_order_status>processing</successful_order_status>
+                </general>
+                <model>FloatPaymentsGatewayFacade</model>
+            </float>
+        </payment>
+    </default>
+</config>

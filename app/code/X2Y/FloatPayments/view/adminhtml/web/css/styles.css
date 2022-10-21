@@ -1,0 +1,25 @@
+/**
+ * @author    X2Y.io Dev Team
+ * @copyright Copyright (c) X2Y.io, Inc. (https://x2y.io/)
+ */
+#payment_other_float  > .comment {
+    display: none;
+}
+.float-section .float-payment-logo {
+    background: url("../images/logo.svg") no-repeat 0 50% / auto;
+    height: 100px;
+    width: auto;
+    padding-left: 12rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.float-section .button-container {
+    float: right;
+}
+
+.float-section .float-payment-text {
+    display: inline-block;
+    vertical-align: middle;
+    width: 50%
+}
